@@ -6,19 +6,23 @@ namespace HitMaster.Core.Player {
 	/// </summary>
 	public class PlayerAnimationStateController : MonoBehaviour {
 		private Animator _animator;
-		private readonly string _runningName = "IsRunning";
-		private readonly string _aimName = "IsAim";
-		private readonly string _shootingName = "Shooting";
+		private readonly int _runningNameID = Animator.StringToHash("IsRunning");
+		private readonly int _aimNameID = Animator.StringToHash("IsAim");
+		private readonly int _shootingNameID = Animator.StringToHash("Shooting");
 
 		private bool _isRunning;
 		private bool _isAim;
+
+		private void Awake() {
+			_animator = GetComponent<Animator>();
+		}
 
 		public bool IsRunning {
 			get => _isRunning;
 			set {
 				if (value != _isRunning) {
 					_isRunning = value;
-					_animator.SetBool(_runningName, value);
+					_animator.SetBool(_runningNameID, value);
 				}
 			}
 		}
@@ -28,17 +32,13 @@ namespace HitMaster.Core.Player {
 			set {
 				if (value != _isAim) {
 					_isAim = value;
-					_animator.SetBool(_aimName, value);
+					_animator.SetBool(_aimNameID, value);
 				}
 			}
 		}
 
 		public void Shooting() {
-			_animator.SetTrigger(_shootingName);
-		}
-
-		private void Awake() {
-			_animator = GetComponent<Animator>();
+			_animator.SetTrigger(_shootingNameID);
 		}
 	}
 }
