@@ -2,21 +2,20 @@
 
 namespace HitMaster.Core.Enemy {
 	public class RagdollKinematicController : MonoBehaviour {
-		[SerializeField] private Animator _animator;
-		[SerializeField] private Rigidbody[] _rigidbodies;
+		[SerializeField] private Animator animator;
+		[SerializeField] private Rigidbody[] rigidbodies;
 
 		private void Awake() {
 			SetRigidbodyKinematic(true);
 		}
 
-		[ContextMenu("SetPhysical")]
 		public void SetPhysical() {
-			_animator.enabled = false;
+			animator.enabled = false;
 			SetRigidbodyKinematic(false);
 		}
 
 		private void SetRigidbodyKinematic(bool isKinematic) {
-			foreach (var currentRigidbody in _rigidbodies) {
+			foreach (var currentRigidbody in rigidbodies) {
 				currentRigidbody.isKinematic = isKinematic;
 			}
 		}
