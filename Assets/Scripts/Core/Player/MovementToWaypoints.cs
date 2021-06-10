@@ -3,28 +3,47 @@ using UnityEngine.AI;
 
 namespace HitMaster.Core.Player {
 	public class MovementToWaypoints : MonoBehaviour {
-		[SerializeField] private Transform[] points;
+		[SerializeField] private Transform point;
 
 		private NavMeshAgent _navMeshAgent;
-		private int _currentPoint;
 
 		private void Awake() {
 			_navMeshAgent = GetComponent<NavMeshAgent>();
 		}
 
-		[ContextMenu(nameof(GoToNextPoint))]
-		private void GoToNextPoint() {
-			if (_currentPoint < points.Length) {
-				GoToPoint(points[_currentPoint].position);
-				_currentPoint++;
+		private void Start() {
+			GoToPoint(point.position);
+			Stop();
+		}
+
+		public bool HasFinish() {
+			if (HasStop()) {
+				return _navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete;
 			}
-			else {
-				Debug.LogWarning("Object at the last point");
+			return false;
+		}
+
+		[ContextMenu(nameof(Resume))]
+		public void Resume() {
+			if (_navMeshAgent.isStopped) {
+				_navMeshAgent.isStopped = false;
+			}
+			else if (!HasFinish()) {
+				GoToPoint(point.position);
 			}
 		}
 
-		private void GoToPoint(Vector3 point) {
-			_navMeshAgent.SetDestination(point);
+		[ContextMenu(nameof(Stop))]
+		public void Stop() {
+			_navMeshAgent.isStopped = true;
+		}
+
+		public bool HasStop() {
+			return _navMeshAgent.isStopped;
+		}
+
+		private void GoToPoint(Vector3 position) {
+			_navMeshAgent.SetDestination(position);
 		}
 	}
 }
