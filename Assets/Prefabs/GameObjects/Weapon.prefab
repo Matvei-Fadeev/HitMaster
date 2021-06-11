@@ -95,7 +95,7 @@ MonoBehaviour:
   shotDelay: 0.5
   _shootingController: {fileID: 2940491382515873076}
   bulletPool: {fileID: 4828192222731215990}
-  bulletSpawnOffset: 1
+  bulletSpawnOffset: 0
 --- !u!114 &2940491382515873076
 MonoBehaviour:
   m_ObjectHideFlags: 0

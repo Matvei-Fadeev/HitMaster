@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace HitMaster.Core.Weapon {
@@ -6,13 +7,18 @@ namespace HitMaster.Core.Weapon {
 	public class Bullet : DamageableCollision {
 		[SerializeField] private float speed = 10f;
 		[SerializeField] private float maxLifetime = 2f;
+		[SerializeField] private float invulnerableTime = 0.1f;
 
 		private BulletPool _bulletPool;
 		private Rigidbody _rigidbody;
+		private Collider _collider;
+		private WaitForSeconds _invulnerableDelay;
 
 		private void Awake() {
 			_bulletPool = GetComponentInParent<BulletPool>();
 			_rigidbody = GetComponent<Rigidbody>();
+			_collider = GetComponent<Collider>();
+			_invulnerableDelay = new WaitForSeconds(invulnerableTime);
 		}
 
 		protected override void OnCollisionEnter(Collision collision) {
@@ -27,6 +33,7 @@ namespace HitMaster.Core.Weapon {
 		public void Shoot(Vector3 direction) {
 			transform.SetParent(null);
 			_rigidbody.velocity = direction * speed;
+			StartCoroutine(MakeTemporarilyInvulnerable());
 			Invoke(nameof(ReturnToPool), maxLifetime);
 		}
 
@@ -37,6 +44,12 @@ namespace HitMaster.Core.Weapon {
 			else {
 				Destroy(gameObject);
 			}
+		}
+
+		private IEnumerator MakeTemporarilyInvulnerable() {
+			_collider.enabled = false;
+			yield return _invulnerableDelay;
+			_collider.enabled = true;
 		}
 	}
 }

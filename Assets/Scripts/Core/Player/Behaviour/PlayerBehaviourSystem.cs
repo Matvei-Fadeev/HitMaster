@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace HitMaster.Core.Player.Behaviour {
 	public class PlayerBehaviourSystem : MonoBehaviour {
@@ -9,6 +10,14 @@ namespace HitMaster.Core.Player.Behaviour {
 
 		private void Start() {
 			SetState(new IdleState());
+		}
+
+		private void OnEnable() {
+			Player.Weapon.HasShot += SetShootingState;
+		}
+
+		private void OnDisable() {
+			Player.Weapon.HasShot -= SetShootingState;
 		}
 
 		private void Update() {
@@ -23,5 +32,10 @@ namespace HitMaster.Core.Player.Behaviour {
 			playerState.BehaviourSystem = this;
 			playerState.Start();
 		}
+		
+		private void SetShootingState() {
+			SetState(new ShootingState());
+		}
+
 	}
 }
