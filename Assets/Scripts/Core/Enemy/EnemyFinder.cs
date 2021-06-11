@@ -9,8 +9,11 @@ namespace HitMaster.Core.Enemy {
 		[SerializeField] private float radius = 10f;
 		[SerializeField] private float delayBetweenChecks = 0.5f;
 
-		private float _timeSinceLastCheck;
 		private bool _hasEnemyAtLastCheck;
+		private float _timeSinceLastCheck;
+		private Transform _closestEnemy;
+
+		public Transform ClosestEnemy => _closestEnemy;
 
 		private void OnDrawGizmos() {
 			Gizmos.color = Color.magenta;
@@ -35,6 +38,7 @@ namespace HitMaster.Core.Enemy {
 				if (enemies[i]) {
 					var checkByPosition = (enemies[i].transform.position - selfPosition).sqrMagnitude < sqrtRadius;
 					if (checkByPosition && !enemies[i].HasDeath) {
+						_closestEnemy = enemies[i].transform;
 						return true;
 					}
 				}

@@ -8,7 +8,7 @@
 			if (BehaviourSystem.Player.EnemyFinder.HasEnemyInRadius()) {
 				BehaviourSystem.SetState(new AimState());
 			}
-			else if (BehaviourSystem.Player.MovementToWaypoints.HasStop()) {
+			else if (!BehaviourSystem.Player.MovementToWaypoints.HasStop()) {
 				BehaviourSystem.SetState(new RunningState());
 			}
 		}

@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 4508037862308820687}
   - component: {fileID: 2949203712762124047}
   - component: {fileID: 1603306807313769882}
-  - component: {fileID: 7069298785618624502}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -280,7 +279,7 @@ MonoBehaviour:
   _playerAnimationStateController: {fileID: 1866391059705987016}
   _enemyFinder: {fileID: 1603306807313769882}
   _movementToWaypoints: {fileID: 4508037862308820687}
-  _inputHandler: {fileID: 7069298785618624502}
+  _weapon: {fileID: 2737959516119338843}
 --- !u!114 &1866391059705987016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,18 +337,6 @@ MonoBehaviour:
   - {fileID: 0}
   radius: 7
   delayBetweenChecks: 0.5
---- !u!114 &7069298785618624502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2952617611187802830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d50f1af5f44ea89756c52ee0ed5e9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2952635259393885566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,3 +2069,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3050509871951564515}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2737959516119338843 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1128918326556180920, guid: 44be2f9ded0642e458d238d16a1a011a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3050509871951564515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04223eafa3d4a3a4da01589627de9618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
