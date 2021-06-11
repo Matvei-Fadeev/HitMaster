@@ -2600,6 +2600,7 @@ GameObject:
   - component: {fileID: 3246614080837362392}
   - component: {fileID: 2021646756273711202}
   - component: {fileID: 7117106432325628261}
+  - component: {fileID: 6495419741491354605}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2686,6 +2687,19 @@ MonoBehaviour:
   health: 3
   text: {fileID: 5359613771013540442}
   hasDisableWhenDying: 1
+--- !u!65 &6495419741491354605
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5892781323873461001}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 1.8, z: 0.6}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &5892810403454281465
 GameObject:
   m_ObjectHideFlags: 0
