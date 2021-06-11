@@ -35,7 +35,7 @@ namespace HitMaster.Core.Weapon {
 				_timeOfShot = Time.time;
 				
 				var bulletSpawnPosition = transform.position + transform.up * bulletSpawnOffset;
-				var endPosition = DirectionToShoot.HitPosition();
+				var endPosition = TouchInputHandler.GetTouchedWorldPoint();
 				var bulletDirection = endPosition - bulletSpawnPosition;
 
 				var canShot = _shootingController.CanShot(bulletSpawnPosition, transform.forward, endPosition);
