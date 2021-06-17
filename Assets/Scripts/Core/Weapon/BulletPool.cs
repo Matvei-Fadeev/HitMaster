@@ -8,6 +8,7 @@ namespace HitMaster.Core.Weapon {
 	/// </summary>
 	public class BulletPool : MonoBehaviour {
 		[SerializeField] private Bullet bulletPrefab;
+		[Tooltip("Amount of prespawned bullet")]
 		[SerializeField] private int bulletsAmount = 10;
 
 		private readonly Queue<Bullet> _bulletsPool = new Queue<Bullet>();
