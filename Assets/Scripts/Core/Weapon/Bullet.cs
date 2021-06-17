@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace HitMaster.Core.Weapon {
 	[RequireComponent(typeof(Rigidbody))]
-	[RequireComponent(typeof(BoxCollider))]
-	public class Bullet : DamageableCollision {
+	public class Bullet : DamagingCollision {
 		[SerializeField] private float speed = 10f;
 		[SerializeField] private float maxLifetime = 2f;
 		[SerializeField] private float invulnerableTime = 0.1f;
