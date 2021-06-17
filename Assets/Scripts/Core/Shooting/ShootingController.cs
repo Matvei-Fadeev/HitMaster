@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HitMaster.Input;
+using UnityEngine;
 
 namespace HitMaster.Core.Shooting {
 	/// <summary>
@@ -17,13 +18,18 @@ namespace HitMaster.Core.Shooting {
 			_shotHandler.SetNext(shotAcceptableAngle);
 		}
 
-		public bool CanShot(Vector3 startPosition, Vector3 startDirection, Vector3 endPosition) {
+		public bool CanShot(Vector3 startPosition, Vector3 lookingDirection, Vector3 endPosition) {
 			_shootingData.startPosition = startPosition;
-			_shootingData.lookingDirection = startDirection;
+			_shootingData.lookingDirection = lookingDirection;
 			_shootingData.endPosition = endPosition;
 
 			var canShooting = _shotHandler.Handle(_shootingData);
 			return canShooting;
+		}
+
+		// The simplest check for shooting
+		public bool HasShotInput() {
+			return TouchInputHandler.HasTouch();
 		}
 	}
 }

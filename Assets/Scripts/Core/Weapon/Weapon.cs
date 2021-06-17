@@ -9,8 +9,8 @@ namespace HitMaster.Core.Weapon {
 	/// Берут из очереди пули, и выстреливает в нужном направлении.
 	/// </summary>
 	public class Weapon : MonoBehaviour {
-		public event Action HasShot; 
-		
+		public event Action HavingShot;
+
 		[Header("Weapon configuration")]
 		[SerializeField] private float shotDelay = 0.5f;
 
@@ -21,27 +21,27 @@ namespace HitMaster.Core.Weapon {
 		private float _timeOfShot;
 
 		private void Update() {
-			if (TouchInputHandler.HasTouch()) {
-				TakeShot();
+			if (_shootingController.HasShotInput() && (Time.time - _timeOfShot) > shotDelay) {
+				_timeOfShot = Time.time;
+				TryTakeShot();
 			}
 		}
 
-		private void TakeShot() {
-			if ((Time.time - _timeOfShot) > shotDelay) {
-				_timeOfShot = Time.time;
-				
-				var bulletSpawnPosition = transform.position;
-				var endPosition = TouchInputHandler.GetTouchedWorldPoint();
-				var bulletDirection = (endPosition - bulletSpawnPosition).normalized;
+		private void TryTakeShot() {
+			Vector3 bulletSpawnPosition = transform.position;
+			Vector3 endPosition = TouchInputHandler.GetTouchedWorldPoint();
+			Vector3 bulletDirection = (endPosition - bulletSpawnPosition).normalized;
 
-				var canShot = _shootingController.CanShot(bulletSpawnPosition, transform.forward, endPosition);
-
-				if (canShot) {
-					HasShot?.Invoke();
-					var bullet = bulletPool.GetBullet(bulletSpawnPosition);
-					bullet.Shoot(bulletDirection);
-				}
+			bool canShot = _shootingController.CanShot(bulletSpawnPosition, transform.forward, endPosition);
+			if (canShot) {
+				HavingShot?.Invoke();
+				TakeShot(bulletSpawnPosition, bulletDirection);
 			}
+		}
+		
+		private void TakeShot(Vector3 bulletSpawnPosition, Vector3 bulletDirection) {
+			Bullet bullet = bulletPool.GetBullet(bulletSpawnPosition);
+			bullet.Shoot(bulletDirection);
 		}
 	}
 }
