@@ -13,11 +13,11 @@ namespace HitMaster.Core.Player.Behaviour {
 		}
 
 		private void OnEnable() {
-			Player.Weapon.HasShot += SetShootingState;
+			Player.Weapon.HavingShot += SetShootingState;
 		}
 
 		private void OnDisable() {
-			Player.Weapon.HasShot -= SetShootingState;
+			Player.Weapon.HavingShot -= SetShootingState;
 		}
 
 		private void Update() {
